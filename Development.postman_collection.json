@@ -1,0 +1,762 @@
+{
+	"info": {
+		"_postman_id": "ffbc55fd-8e5d-4ffe-9ea8-e46068b956b9",
+		"name": "Development",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9302952"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "200 : Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"TOKEN\", jsonData.token);",
+									"",
+									"pm.test(\"expected status code 200\", () => {",
+									"  const expectedStatusCode = 200;",
+									"    });",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"employee_id\": \"2412202102\",\n  \"password\": \"771346Jy!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "This function comment is parsed by doctrine"
+					},
+					"response": []
+				},
+				{
+					"name": "400 : login failed ( Invalid Employee ID)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"expected status code 404\", () => {",
+									"  const expectedStatusCode = 404;",
+									"    });",
+									"",
+									"pm.test(\"Employee ID not found  \", function() {",
+									"                var jsonData = pm.response.json();",
+									"                pm.expect(jsonData.message).to.eql(\"Employee ID not found\");",
+									"            });",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"employee_id\": \"241220210\",\n  \"password\": \"771346Jy!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "400 : Login Failed (Blank value Employee ID)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"expected status code 422\", () => {",
+									"  const expectedStatusCode = 422;",
+									"    });",
+									"",
+									"pm.test(\"employee id can not be empty  \", function() {",
+									"",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.errors.employee_id).to.eql([\"employee_id can not be empty\"]);",
+									"            });",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"employee_id\": \"\",\n  \"password\": \"771346Jy!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "400 : Login Failed (Invalid Password)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"expected status code 400\", () => {",
+									"  const expectedStatusCode = 400;",
+									"    });",
+									"",
+									"pm.test(\"Your password is wrong \", function() {",
+									"",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"Your password is wrong\");",
+									"            });",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"employee_id\": \"2412202102\",\n  \"password\": \"771346Jy\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "400 : Login Failed (Blank valuec Password)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"expected status code 422\", () => {",
+									"  const expectedStatusCode = 422;",
+									"    });",
+									"",
+									"pm.test(\"Password can not be empty \", function() {",
+									"",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.errors.password).to.eql([\"Password can not be empty\"]);",
+									"            });",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"employee_id\": \"2412202102\",\n  \"password\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "api/user",
+			"item": [
+				{
+					"name": "200 : Create user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"expected status code 200\", () => {\r",
+									"  const expectedStatusCode = 200;\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"id\", jsonData.data.id);\r",
+									"\r",
+									"  pm.response.to.have.status(expectedStatusCode);\r",
+									"});\r",
+									"pm.test(\"API responds respon expectedTimeInMilliseconds 500\", () => {\r",
+									"\r",
+									"  const expectedTimeInMilliseconds = 500;\r",
+									"\r",
+									"  pm.expect(pm.response.responseTime).to.be.lessThan(\r",
+									"    expectedTimeInMilliseconds + 1,\r",
+									"    `The endpoint did not respond within ${expectedTimeInMilliseconds} ms. Response came in ${pm.response.responseTime} ms`\r",
+									"  );\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"employee_id\": \"01\",\n    \"name\": \"Jamal\",\n    \"email\": \"Jamal@gmail.com\",\n    \"password\": \"bismillah\",\n    \"role\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						},
+						"description": "POST Create New User"
+					},
+					"response": []
+				},
+				{
+					"name": "200 : List user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"the endpoint returns the expected status code\", () => {\r",
+									" \r",
+									"  const expectedStatusCode = 200;\r",
+									"\r",
+									"  pm.response.to.have.status(expectedStatusCode);\r",
+									"});\r",
+									"pm.test(\"API responds within the expected treshhold\", () => {\r",
+									"    \r",
+									"  const expectedTimeInMilliseconds = 500;\r",
+									"\r",
+									"  pm.expect(pm.response.responseTime).to.be.lessThan(\r",
+									"    expectedTimeInMilliseconds + 1,\r",
+									"    `The endpoint did not respond within ${expectedTimeInMilliseconds} ms. Response came in ${pm.response.responseTime} ms`\r",
+									"  );\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/user/list?name_or_employeeNumber=&role=&page=1&paginate=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"list"
+							],
+							"query": [
+								{
+									"key": "name_or_employeeNumber",
+									"value": "",
+									"description": "isikan nama atau employee_id"
+								},
+								{
+									"key": "role",
+									"value": "",
+									"description": "1,2,3,4,5"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page - 1"
+								},
+								{
+									"key": "paginate",
+									"value": "10",
+									"description": "Paginate - 10"
+								}
+							]
+						},
+						"description": "GET List User by pagination"
+					},
+					"response": []
+				},
+				{
+					"name": "200 : Detail user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"expected status code 200\", () => {",
+									"  const expectedStatusCode = 200;",
+									"    });",
+									"",
+									"pm.test(\"Show Name is Jamal \", function() {",
+									"                var jsonData = pm.response.json();",
+									"                pm.expect(jsonData.name).to.eql(\"Jamal\");",
+									"            });",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/user/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"{{id}}"
+							]
+						},
+						"description": "GET List User by pagination"
+					},
+					"response": []
+				},
+				{
+					"name": "200 : Update user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"expected status code 200 or 201\", () => {\r",
+									"  const expectedStatusCodes = [200, 201];\r",
+									"\r",
+									"  pm.expect(pm.response.code).to.be.oneOf(\r",
+									"    expectedStatusCodes,\r",
+									"    `expected response status to be one of ${expectedStatusCodes} but got ${pm.response.code}.`\r",
+									"  );\r",
+									"})\r",
+									"pm.test(\"API responds respon expectedTimeInMilliseconds 500\", () => {\r",
+									"\r",
+									"  const expectedTimeInMilliseconds = 500;\r",
+									"\r",
+									"  pm.expect(pm.response.responseTime).to.be.lessThan(\r",
+									"    expectedTimeInMilliseconds + 1,\r",
+									"    `The endpoint did not respond within ${expectedTimeInMilliseconds} ms. Response came in ${pm.response.responseTime} ms`\r",
+									"  );\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"employee_id\": \"01\",\n    \"name\": \"Jamal Susanto\",\n    \"email\": \"jamalsuganda@gmail.com\",\n    \"password\": \"bismillah\",\n    \"role\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/user/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"{{id}}"
+							]
+						},
+						"description": "PATCH Update User"
+					},
+					"response": []
+				},
+				{
+					"name": "200 : Delete user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"expected status code 200\", () => {",
+									"  const expectedStatusCode = 200;",
+									"});",
+									"",
+									"pm.test(\"Success delete data \", function() {",
+									"                var jsonData = pm.response.json();",
+									"                pm.expect(jsonData.message).to.eql(\"Success delete data\");",
+									"            });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/user/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"{{id}}"
+							]
+						},
+						"description": "PATCH Update User"
+					},
+					"response": []
+				},
+				{
+					"name": "200 : Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"expected status code 200\", () => {",
+									"  const expectedStatusCode = 200;",
+									"    });",
+									"",
+									"",
+									"pm.test(\"You have been logout \", function() {",
+									"                var jsonData = pm.response.json();",
+									"                pm.expect(jsonData.message).to.eql(\"You have been logout\");",
+									"            });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/logout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						},
+						"description": "This function comment is parsed by doctrine"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
