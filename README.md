@@ -2,7 +2,8 @@
 
 ## Prerequisites
 * Download File
-* Import Collection and ENV
+* Import Collection
+* Import Environment
  
 ## Running the Project
 * Running Collection
