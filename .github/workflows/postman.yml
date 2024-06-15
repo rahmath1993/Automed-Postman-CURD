@@ -29,9 +29,6 @@ jobs:
         postman-cli run postman/collection.json --environment postman/environment.json --reporters cli,json --reporter-json-output postman/report.json
 
 
-
-
-
   automated-api-tests:
     runs-on: macos-latest
     steps:
