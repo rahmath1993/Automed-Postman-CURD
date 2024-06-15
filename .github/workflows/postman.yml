@@ -21,12 +21,12 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Install Postman CLI
-      run: npm install -g @postman/cli
+    - name: Install Newman
+      run: npm install -g newman
 
     - name: Run Postman Collection
       run: |
-        postman-cli run postman/collection.json --environment postman/environment.json --reporters cli,json --reporter-json-output postman/report.json
+        newman run postman/collection.json --environment postman/environment.json --reporters cli,json --reporter-json-export postman/report.json
 
 
   automated-api-tests:
