@@ -72,7 +72,7 @@
 					"response": []
 				},
 				{
-					"name": "400 : login failed ( Invalid Employee ID)",
+					"name": "404 : login failed ( Invalid Employee ID)",
 					"event": [
 						{
 							"listen": "test",
@@ -136,7 +136,7 @@
 					"response": []
 				},
 				{
-					"name": "400 : Login Failed (Blank value Employee ID)",
+					"name": "422 : Login Failed (Blank value Employee ID)",
 					"event": [
 						{
 							"listen": "test",
@@ -266,7 +266,7 @@
 					"response": []
 				},
 				{
-					"name": "400 : Login Failed (Blank valuec Password)",
+					"name": "422 : Login Failed (Blank valuec Password)",
 					"event": [
 						{
 							"listen": "test",
@@ -431,7 +431,9 @@
 									"    expectedTimeInMilliseconds + 1,\r",
 									"    `The endpoint did not respond within ${expectedTimeInMilliseconds} ms. Response came in ${pm.response.responseTime} ms`\r",
 									"  );\r",
-									"});"
+									"});\r",
+									"\r",
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -520,6 +522,8 @@
 									"                var jsonData = pm.response.json();",
 									"                pm.expect(jsonData.name).to.eql(\"Jamal\");",
 									"            });",
+									"",
+									"",
 									"",
 									""
 								],
